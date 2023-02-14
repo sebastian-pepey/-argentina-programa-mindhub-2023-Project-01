@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Amazing Events</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-xl header">
+    <div class="container-fluid">
+      <a class="navbar-brand col-7 m" href="#"><img class="img-logo" src="./assets/logo-amazing-events-blc.png" alt="amazing-events-logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+          <li class="nav-item m-2">
+            <a class="nav-link" href="./index.html">Home</a>
+          </li>
+          <li class="nav-item m-2">
+            <a class="nav-link" href="./upcoming-events.html">Upcoming Events</a>
+          </li>
+          <li class="nav-item m-2">
+            <a class="nav-link" href="./past-events.html">Past Events</a>
+          </li>
+          <li class="nav-item m-2">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item m-2">
+            <a class="nav-link" href="./stats.html">Stats</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid d-flex justify-content-center align-items-center bar-obscure banner">
+    <div class="col-auto"><a class="nav-link" href="./past-events.html"><i class="bi bi-arrow-left-square-fill arrows"></i></a></div>
+    <div class="col-8 text-center"><h1>Contact</h1></div>
+    <div class="col-auto"><a class="nav-link" href="./stats.html"><i class="bi bi-arrow-right-square-fill arrows"></i></a></div>
+  </div>
+
+    <main>
+        <div class="container">
+            <form class="border p-5 m-2">
+                <div class="mb-3">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="name" class="form-control" id="inputName">
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email address</label>
+                    <input type="inputEmail" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="formControlTextarea" class="form-label">Example textarea</label>
+                    <textarea class="form-control" id="formControlTextarea" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>     
+        </div>
+    </main>
+
+    <footer class="container-fluid bar-obscure">
+      <div class="row w-100 text-center pt-4 pt-lg-0">
+        <div class="col-lg-3 d-flex align-items-center justify-content-center">
+          <i class="bi bi-instagram col-3"></i>
+          <i class="bi bi-facebook col-3"></i>
+          <i class="bi bi-whatsapp col-3"></i>
+        </div>
+        <div class="col-lg-9 pt-4">
+          <p>Amazing Events - All rights Reserved</p>
+          <p>Made with <span>❤</span> for Argentina Programa Mindhub 2023 - FE-07-TN</p>
+        </div>      
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

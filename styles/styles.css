@@ -1,0 +1,210 @@
+:root {
+    --fondo-01 : #282828;
+    --fondo-02: #7e7b91; 
+    --color-a: #6EB349;
+    --color-b: #f5cf52;
+    --color-c: #FF5050;
+    --color-d: #332752;
+    --color-e: #d4d4d4d6;
+    --blanco: #ffffff;
+    --transparencia: rgba(115, 115, 115, 0.453);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+main {
+    background-color: var(--fondo-02);
+}
+
+.header {
+    background-color: var(--color-d);
+}
+
+.navbar {
+    overflow: hidden;
+}
+
+.img-logo {
+    filter: drop-shadow(2px 2px 5px var(--transparencia));
+    height: 50px;
+}
+
+.img-logo:hover {
+    filter: drop-shadow(2px 2px 5px var(--fondo-02));
+}
+
+.nav-item {
+    background-color: var(--fondo-02);
+    border-radius: 10px;
+}
+
+.card {
+    box-shadow: 5px 5px 5px var(--transparencia);
+}
+
+.card:hover {
+    box-shadow: 5px 5px 0px var(--fondo-01);
+}
+
+.card-img-top {
+    padding: 10px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-text {
+    height: 85px;
+}
+
+.banner{
+    height: 100px;
+    background-image: url('./../assets/nyc-01.jpg');
+    background-position: 0% 50%;
+    background-size: cover;
+    transition: 1s;
+}
+
+.arrows {
+    font-size: 3rem;
+}
+
+.bar-obscure {
+    background-color: var(--fondo-01) !important;
+    color: var(--blanco);
+}
+
+.bar-red {
+    background-color: var(--color-c) !important;
+    color: var(--blanco);
+}
+
+form {
+    background-color: var(--color-e);
+    border-radius: 10px;
+}
+
+footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer i {
+    font-size: 2rem;
+}
+
+footer span {
+    color: var(--color-c);
+}
+
+.detail-img {
+    margin: 10px;
+}
+
+/* Fireworks!!! */
+
+.firework {
+	position: absolute;
+}
+.explosion {
+	position: absolute;
+	left: -2px;
+	bottom: 0;
+	width: 4px;
+	height: 80px;
+	transform-origin: 50% 100%;
+	overflow: hidden;
+}
+.explosion:nth-child(1) {
+	transform: rotate(0deg) translateY(-15px);
+}
+.explosion:nth-child(2) {
+	transform: rotate(30deg) translateY(-15px);
+}
+.explosion:nth-child(3) {
+	transform: rotate(60deg) translateY(-15px);
+}
+.explosion:nth-child(4) {
+	transform: rotate(90deg) translateY(-15px);
+}
+.explosion:nth-child(5) {
+	transform: rotate(120deg) translateY(-15px);
+}
+.explosion:nth-child(6) {
+	transform: rotate(150deg) translateY(-15px);
+}
+.explosion:nth-child(7) {
+	transform: rotate(180deg) translateY(-15px);
+}
+.explosion:nth-child(8) {
+	transform: rotate(210deg) translateY(-15px);
+}
+.explosion:nth-child(9) {
+	transform: rotate(240deg) translateY(-15px);
+}
+.explosion:nth-child(10) {
+	transform: rotate(270deg) translateY(-15px);
+}
+.explosion:nth-child(11) {
+	transform: rotate(300deg) translateY(-15px);
+}
+.explosion:nth-child(12) {
+	transform: rotate(330deg) translateY(-15px);
+}
+
+.explosion::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 100%;
+	height: 40px;
+	background-color: var(--color-b);
+}
+@keyframes explosion {
+	0% {
+		top: 100%;
+	}
+	33%, 100% {
+		top: -50%;
+	}
+}
+
+#firework1 {
+	left: 30%;
+	top: 50%;
+	transform: scale(1);
+}
+#firework1 .explosion::before {
+	animation: explosion 2s ease-in-out 2 forwards;
+}
+
+#firework2 {
+	left: 40%;
+	top: 45%;
+	transform: scale(.7);
+}
+#firework2 .explosion::before {
+	animation: explosion 2s .6s ease-in-out 2 forwards;
+}
+
+#firework3 {
+	left: 50%;
+	top: 65%;
+	transform: scale(.4);
+}
+#firework3 .explosion::before {
+	animation: explosion 2s .4s ease-in-out 2 forwards;
+}
