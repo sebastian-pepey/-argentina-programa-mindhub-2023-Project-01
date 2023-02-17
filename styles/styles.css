@@ -70,6 +70,10 @@ body {
     box-shadow: 5px 5px 5px var(--color-d);
 }
 
+.card-title {
+    height: 40px;
+}
+
 .card-img-top {
     padding: 10px;
     height: 150px;
@@ -77,7 +81,7 @@ body {
 }
 
 .card-text {
-    height: 85px;
+    height: 130px;
 }
 
 .banner{
