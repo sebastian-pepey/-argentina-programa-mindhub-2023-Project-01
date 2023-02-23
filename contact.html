@@ -11,56 +11,57 @@
       <title>Amazing Events</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-xl header">
+    <header class="navbar navbar-expand-xl header">
       <div class="container-fluid">
-        <a class="navbar-brand col-7 m" href="./index.html"><img class="img-logo" src="./assets/logo-amazing-events-blc.png" alt="amazing-events-logo"></a>
-        <button class="navbar-toggler nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./index.html">Home</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./upcoming-events.html">Upcoming Events</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./past-events.html">Past Events</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="#">Contact</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./stats.html">Stats</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container-fluid d-flex justify-content-center align-items-center bar-obscure banner">
-      <div class="col-auto"><a class="nav-link" href="./past-events.html"><i class="bi bi-arrow-left-square-fill arrows"></i></a></div>
-      <div class="col-8 text-center"><h1>Contact</h1></div>
-      <div class="col-auto"><a class="nav-link" href="./stats.html"><i class="bi bi-arrow-right-square-fill arrows"></i></a></div>
-    </div>
+        <a class="navbar-brand" href="./index.html"><img class="img-logo" src="./assets/logo-amazing-events-blc.png" alt="amazing-events-logo"></a>
+        <nav>
+          <button class="navbar-toggler nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-xl-flex justify-content-end me-4" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./upcoming-events.html">Upcoming Events</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./past-events.html">Past Events</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./stats.html">Stats</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
     <main>
-        <div class="container">
-            <form class="border border-2 shadow p-5 m-2">
-                <div class="mb-3">
-                    <label for="inputName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="inputName">
-                </div>
-                <div class="mb-3">
-                    <label for="inputEmail" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="inputEmail">
-                </div>
-                <div class="mb-3">
-                    <label for="formControlTextarea" class="form-label">Message</label>
-                    <textarea class="form-control" id="formControlTextarea" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-danger">Submit</button>
-            </form>     
-        </div>
+      <div class="container-fluid d-flex justify-content-center align-items-center bar-obscure banner">
+        <div class="col-auto"><a class="nav-link" href="./past-events.html"><i class="bi bi-arrow-left-square-fill arrows"></i></a></div>
+        <div class="col-8 text-center"><h1>Contact</h1></div>
+        <div class="col-auto"><a class="nav-link" href="./stats.html"><i class="bi bi-arrow-right-square-fill arrows"></i></a></div>
+      </div>
+      <div class="container">
+          <form class="border border-2 shadow p-5 m-2">
+              <div class="mb-3">
+                  <label for="inputName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="inputName">
+              </div>
+              <div class="mb-3">
+                  <label for="inputEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="inputEmail">
+              </div>
+              <div class="mb-3">
+                  <label for="formControlTextarea" class="form-label">Message</label>
+                  <textarea class="form-control" id="formControlTextarea" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Submit</button>
+          </form>     
+      </div>
     </main>
     <footer class="container-fluid bar-obscure">
       <div class="row w-100 text-center pt-4 pt-lg-0">

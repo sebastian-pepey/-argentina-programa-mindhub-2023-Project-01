@@ -11,78 +11,48 @@
       <title>Amazing Events</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-xl header">
+    <header class="navbar navbar-expand-xl header">
       <div class="container-fluid">
-        <a class="navbar-brand col-7 m" href="./index.html"><img class="img-logo" src="./assets/logo-amazing-events-blc.png" alt="amazing-events-logo"></a>
-        <button class="navbar-toggler nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./index.html">Home</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="#">Upcoming Events</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./past-events.html">Past Events</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./contact.html">Contact</a>
-            </li>
-            <li class="nav-item m-2">
-              <a class="nav-link" href="./stats.html">Stats</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+        <a class="navbar-brand" href="./index.html"><img class="img-logo" src="./assets/logo-amazing-events-blc.png" alt="amazing-events-logo"></a>
+        <nav>
+          <button class="navbar-toggler nav-item" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse d-xl-flex justify-content-end me-4" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="#">Upcoming Events</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./past-events.html">Past Events</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./contact.html">Contact</a>
+              </li>
+              <li class="nav-item m-2">
+                <a class="nav-link" href="./stats.html">Stats</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+    </header>
     <main>
       <div class="container-fluid d-flex justify-content-center align-items-center bar-obscure banner">
         <div class="col-auto"><a class="nav-link" href="./index.html"><i class="bi bi-arrow-left-square-fill arrows"></i></a></div>
         <div class="col-8 text-center"><h1>Upcoming Events</h1></div>
         <div class="col-auto"><a class="nav-link" href="./past-events.html"><i class="bi bi-arrow-right-square-fill arrows"></i></a></div>
       </div>
-      <div class="navbar bar-red">
-        <div class="container-fluid">
-          <div class="row w-100">
-            <div class="col-4 col-xl-1">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="category-01">
-                <label class="form-check-label" for="category-01">Category</label>
-              </div>
-            </div>
-            <div class="col-4 col-xl-1">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="category-02">
-                <label class="form-check-label" for="category-02">Category</label>
-              </div>
-            </div>
-            <div class="col-4 col-xl-1">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="category-03">
-                <label class="form-check-label" for="category-03">Category</label>
-              </div>
-            </div>
-            <div class="col-4 col-xl-1">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="category-04">
-                <label class="form-check-label" for="category-04">Category</label>
-              </div>
-            </div>
-            <div class="col-4 col-xl-1">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="category-05">
-                <label class="form-check-label" for="category-05">Category</label>
-              </div>
-            </div>
-            <div class="d-xl-flex justify-content-end col-xl-7">
-              <form class="d-flex bar-red search-bar mt-3 mt-xl-0 col-xl-8" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success btn-search" type="submit">Search</button>
-              </form>
-            </div>
+      <div class="navbar bar-red container-fluid">
+        <div class="row w-100 mx-3">
+          <div class="col-xl-9 row categories"></div>
+          <div class="col-xl-3 d-xl-flex justify-content-center">
+            <form class="d-flex bar-red search-bar mt-3 mt-xl-0 col-xl-10" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-success btn-search" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </div>

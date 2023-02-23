@@ -178,23 +178,32 @@ data = {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+const categories = findCategories(data.events);
+
 if (window.location.pathname === '/index.html') {
 
-    placeCards(cols, data.events);
+  placeCategories(categories);
+
+  placeCards(cols, data.events);
 
 }
 
 if (window.location.pathname === '/upcoming-events.html') {
 
-    let upcomingEvents = data.events.filter( element => element.date > data.currentDate)
+  let upcomingEvents = data.events.filter( element => element.date > data.currentDate);
 
-    placeCards(cols, upcomingEvents);
+  placeCategories(categories);
+
+  placeCards(cols, upcomingEvents);
 
 }
 
 if (window.location.pathname === '/past-events.html') {
 
-    let upcomingEvents = data.events.filter( element => element.date < data.currentDate)
+    let upcomingEvents = data.events.filter( element => element.date < data.currentDate);
+
+    placeCategories(categories);
 
     placeCards(cols, upcomingEvents);
 
@@ -237,3 +246,29 @@ function placeCards(cols, inputObject) {
     });
 }
 
+function findCategories(inputObject) {
+
+  let categories = [];
+
+  inputObject.forEach( element => {
+
+    if(categories.indexOf(element.category) === -1) {
+      categories.push(element.category);
+    }
+  })
+
+  return categories;
+}
+
+function placeCategories(categoriesArray) {
+
+  let divCategories = document.querySelector('div.categories');
+
+  categoriesArray.forEach( (element,index) => {
+
+  divCategories.insertAdjacentHTML('beforeend', `<div class="form-check col-sm-4 col-xl">
+      <input class="form-check-input" type="checkbox" value="" id="category-${index}">
+      <label class="form-check-label" for="category-${index}">${element}</label>
+    </div>`)
+  })
+}
