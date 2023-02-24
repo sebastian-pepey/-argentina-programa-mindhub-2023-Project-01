@@ -266,7 +266,7 @@ function placeCategories(categoriesArray) {
 
   categoriesArray.forEach( (element,index) => {
 
-  divCategories.insertAdjacentHTML('beforeend', `<div class="form-check col-sm-4 col-xl">
+  divCategories.insertAdjacentHTML('beforeend', `<div class="form-check mx-3">
       <input class="form-check-input" type="checkbox" value="" id="category-${index}">
       <label class="form-check-label" for="category-${index}">${element}</label>
     </div>`)

@@ -231,3 +231,8 @@ footer span {
 #firework3 .explosion::before {
 	animation: explosion 2s .4s ease-in-out 2 forwards;
 }
+
+@media (min-width: 1200px) {
+
+    
+}
