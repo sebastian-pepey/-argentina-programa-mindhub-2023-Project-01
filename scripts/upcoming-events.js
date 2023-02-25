@@ -179,33 +179,11 @@ data = {
 
 const categories = findCategories(data.events);
 
-if (window.location.pathname === '/index.html') {
+let upcomingEvents = data.events.filter( element => new Date(element.date) > new Date(data.currentDate));
 
-  placeCategories(categories);
+placeCategories(categories);
 
-  placeCards(data.events);
-
-}
-
-if (window.location.pathname === '/upcoming-events.html') {
-
-  let upcomingEvents = data.events.filter( element => new Date(element.date) > new Date(data.currentDate));
-
-  placeCategories(categories);
-
-  placeCards(upcomingEvents);
-
-}
-
-if (window.location.pathname === '/past-events.html') {
-
-  let upcomingEvents = data.events.filter( element => new Date(element.date) < new Date(data.currentDate));
-
-  placeCategories(categories);
-
-  placeCards(upcomingEvents);
-
-}
+placeCards(upcomingEvents);
 
 function placeCards(inputObject) {
 

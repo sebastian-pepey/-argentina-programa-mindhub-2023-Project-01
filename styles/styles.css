@@ -65,6 +65,7 @@ body {
 
 .card {
     box-shadow: 5px 5px 5px var(--transparencia);
+    width: 350px;
 }
 
 .card:hover {
