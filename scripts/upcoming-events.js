@@ -1,6 +1,4 @@
-// fetch('scripts/data.json').then(response => response.json()).then(file => {});
-
-data = {
+const data = {
     currentDate: "2022-01-01",
     events: [
       {
