@@ -92,12 +92,42 @@
           <div class="col-xl-4 d-xl-flex justify-content-center">
             <form class="d-flex bar-red search-bar mt-3 mt-xl-0 col-xl-10" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-success btn-search" type="submit">Search</button>
+              <!-- <button class="btn btn-success btn-search" type="submit">Search</button> -->
             </form>
           </div>
         </div>
       </div>
       <div class="container-fluid d-flex flex-wrap mx-auto justify-content-center justify-content-sm-start events"></div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row border border-2 rounded-3 p-3 m-2 detail-card">
+              <div class="col-lg-6">
+                <img src="./assets/Food_Fair.jpg" class="w-100 rounded-2" alt="food_fair_picture">
+              </div>
+              <div class="col-lg-6 bg-dark rounded-2">
+                <h2>Food Fair</h2>
+                <p></p>
+                <div class="row">
+                  <div class="col"><p>Price: $200</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     </main>
     <footer class="container-fluid bar-obscure">
       <div class="row w-100 text-center pt-4 pt-lg-0">

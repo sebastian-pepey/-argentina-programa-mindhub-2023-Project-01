@@ -174,6 +174,33 @@ const data = {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+let filteredCat = (data) => {
+
+  let catChecked = document.querySelectorAll('.form-check-input:checked');
+
+  if (catChecked.length === 0) {
+
+    return data;
+
+  } else {
+
+    let dataFiltered=[];
+
+    catChecked.forEach( category => {
+
+      data.forEach( event => {
+
+        if(event.category === category.id){
+
+          dataFiltered.push(event)
+
+        }
+      })
+    })
+
+    return dataFiltered;
+  }
+}
 
 const categories = findCategories(data.events);
 
@@ -182,6 +209,10 @@ if (window.location.pathname === '/index.html') {
   placeCategories(categories);
 
   placeCards(data.events);
+
+  filterCategory(data.events);
+  
+  searchBar(data.events);
 
 }
 
@@ -193,15 +224,23 @@ if (window.location.pathname === '/upcoming-events.html') {
 
   placeCards(upcomingEvents);
 
+  filterCategory(upcomingEvents);
+
+  searchBar(upcomingEvents);
+
 }
 
 if (window.location.pathname === '/past-events.html') {
 
-  let upcomingEvents = data.events.filter( element => new Date(element.date) < new Date(data.currentDate));
+  let pastEvents = data.events.filter( element => new Date(element.date) < new Date(data.currentDate));
 
   placeCategories(categories);
 
-  placeCards(upcomingEvents);
+  placeCards(pastEvents);
+
+  filterCategory(pastEvents);
+
+  searchBar(pastEvents);
 
 }
 
@@ -209,9 +248,11 @@ function placeCards(inputObject) {
 
   let divEvent = document.querySelector('div.events');
 
+  divEvent.innerHTML = "";
+
   let fragment = document.createDocumentFragment();
 
-  inputObject.forEach(element => {
+  inputObject.forEach( element => {
 
     let div = document.createElement('div');
 
@@ -223,7 +264,7 @@ function placeCards(inputObject) {
             <div class="row">
                 <div class="col"><p>Price: $${element.price}</p></div>
                 <div class="col">
-                <a href="./details.html" class="btn btn-primary">See more...</a>
+                  <a href="./details.html?id=${element.id}" class="btn btn-primary">See more...</a>
                 </div>
             </div>
         </div>
@@ -243,9 +284,14 @@ function findCategories(inputObject) {
 
   inputObject.forEach( element => {
 
-    if(categories.indexOf(element.category) === -1) {
+    // if(categories.indexOf(element.category) === -1) {
+    //   categories.push(element.category);
+    // }
+
+    if(!categories.includes(element.category)) {
       categories.push(element.category);
     }
+
   })
 
   return categories;
@@ -258,8 +304,96 @@ function placeCategories(categoriesArray) {
   categoriesArray.forEach( (element,index) => {
 
   divCategories.insertAdjacentHTML('beforeend', `<div class="form-check mx-3">
-      <input class="form-check-input" type="checkbox" value="" id="category-${index}">
-      <label class="form-check-label" for="category-${index}">${element}</label>
+      <input class="form-check-input" type="checkbox" value="${element}" id="${element}">
+      <label class="form-check-label" for="${element}">${element}</label>
     </div>`)
   })
 }
+
+function filterCategory(data) {
+
+  let catCheck = document.querySelectorAll('.form-check-input');
+
+  catCheck.forEach( element => element.addEventListener('click',(e) => {
+
+    placeCards(filteredCat(data));
+  
+  }))
+  
+}
+
+function searchBar(data) {
+
+  let searchBar = document.querySelector('input.form-control');
+
+  searchBar.addEventListener('input',(e) => {
+
+    let searchedEvent =[];
+
+    let searchedValue = document.querySelector('input.form-control').value;
+
+    e.preventDefault();
+
+    let catChecked = filteredCat(data);
+
+    catChecked.forEach( event => {
+
+      if(event.name.toLowerCase().includes(searchedValue.toLowerCase())){
+
+        searchedEvent.push(event);
+
+      }
+
+    })
+
+    if(searchedEvent.length === 0 ) {
+
+      let divEvent = document.querySelector('div.events');
+
+      divEvent.innerHTML = "";
+
+      let sign = document.createElement('h2');
+
+      sign.innerText = 'La búsqueda no arrojó ningún resultado';
+
+      divEvent.appendChild(sign);
+
+    } else {
+
+      placeCards(searchedEvent);
+
+    }
+
+  })
+
+}
+
+const queryString = location.search;
+
+const params = new URLSearchParams(queryString);
+
+const id = params.get('id');
+
+const eventDetail = data.events.find(event => event.id.toString() === id)
+
+let detail = document.querySelector('div.detail');
+
+detail.insertAdjacentHTML('beforeend', `<div class="row border border-2 rounded-3 my-4 detail-card">
+<div class="col-lg-8 g-0">
+  <img src="${eventDetail.image}" class="w-100 p-3 object-fit-cover rounded-2" alt="food_fair_picture">
+</div>
+<div class="col-lg-4 p-3 g-0 d-flex flex-column justify-content-end rounded-2">
+  <div class="row m-0 bg-dark text-light">
+    <h2>${eventDetail.name}</h2>
+  </div>
+  <div class="row border border-dark border-opacity-50 mx-0 my-2 rounded-2">
+    <p>${eventDetail.description}</p>
+  </div>
+  <div class="row align-middle m-0">
+    <div class="col bg-info d-flex justify-content-center align-items-center rounded me-2"><p class="m-0">Price: $${eventDetail.price}</p></div>
+    <div class="col g-0">
+      <a href="./index.html" class="btn btn-danger w-100">Back</a>
+    </div>
+  </div>
+</div>
+</div>`)

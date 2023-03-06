@@ -113,8 +113,8 @@ body {
 }
 
 form, .detail-card {
-    background-color: var(--color-d);
-    color: var(--blanco);
+    background-color: var(--blanco);
+    color: var(--fondo-01);
     border-radius: 10px;
 }
 
@@ -135,6 +135,10 @@ footer span {
 
 .detail-img {
     margin: 10px;
+}
+
+div.detail img {
+    height: 400px;
 }
 
 /* Fireworks!!! */
@@ -231,9 +235,4 @@ footer span {
 }
 #firework3 .explosion::before {
 	animation: explosion 2s .4s ease-in-out 2 forwards;
-}
-
-@media (min-width: 1200px) {
-
-    
 }
