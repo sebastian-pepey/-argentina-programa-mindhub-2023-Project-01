@@ -174,17 +174,36 @@ const data = {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+let searchedCat = (data, searchedValue) => {
+
+  let searchedCat = [];
+
+  data.forEach( event => {
+
+    if(event.name.toLowerCase().includes(searchedValue.toLowerCase())){
+  
+      searchedCat.push(event);
+  
+    }
+  })
+
+  return searchedCat;
+
+}
+
 let filteredCat = (data) => {
 
   let catChecked = document.querySelectorAll('.form-check-input:checked');
 
+  let searchedValue = document.querySelector('input.form-control').value;
+
+  let dataFiltered=[];
+
   if (catChecked.length === 0) {
 
-    return data;
+    return searchedCat(data, searchedValue);
 
   } else {
-
-    let dataFiltered=[];
 
     catChecked.forEach( category => {
 
@@ -198,7 +217,8 @@ let filteredCat = (data) => {
       })
     })
 
-    return dataFiltered;
+    return searchedCat(dataFiltered, searchedValue);
+
   }
 }
 
@@ -250,14 +270,25 @@ function placeCards(inputObject) {
 
   divEvent.innerHTML = "";
 
-  let fragment = document.createDocumentFragment();
+  if(inputObject.length === 0) {
+
+    let sign = document.createElement('h2');
+
+    sign.innerText = 'La búsqueda no arrojó ningún resultado';
+
+    divEvent.appendChild(sign);
+
+  } else {
+
+    let fragment = document.createDocumentFragment();
 
   inputObject.forEach( element => {
 
     let div = document.createElement('div');
 
-    div.innerHTML = `<div class="card mx-2 my-3">
-        <img src="${element.image}" class="card-img-top" alt="cinema_picture">
+    div.classList.add('card','mx-2','my-3')
+
+    div.innerHTML = `<img src="${element.image}" class="card-img-top" alt="cinema_picture">
         <div class="card-body">
             <h5 class="card-title">${element.name}</h5>
             <p class="card-text">${element.description}</p>
@@ -267,8 +298,7 @@ function placeCards(inputObject) {
                   <a href="./details.html?id=${element.id}" class="btn btn-primary">See more...</a>
                 </div>
             </div>
-        </div>
-    </div>`
+        </div>`
 
     fragment.appendChild(div);
 
@@ -276,6 +306,7 @@ function placeCards(inputObject) {
 
   divEvent.appendChild(fragment);
 
+  }
 }
 
 function findCategories(inputObject) {
@@ -328,41 +359,15 @@ function searchBar(data) {
 
   searchBar.addEventListener('input',(e) => {
 
-    let searchedEvent =[];
-
+    console.log(e.data)
+  
     let searchedValue = document.querySelector('input.form-control').value;
-
-    e.preventDefault();
-
+  
     let catChecked = filteredCat(data);
 
-    catChecked.forEach( event => {
+    searchedCat(catChecked, searchedValue)
 
-      if(event.name.toLowerCase().includes(searchedValue.toLowerCase())){
-
-        searchedEvent.push(event);
-
-      }
-
-    })
-
-    if(searchedEvent.length === 0 ) {
-
-      let divEvent = document.querySelector('div.events');
-
-      divEvent.innerHTML = "";
-
-      let sign = document.createElement('h2');
-
-      sign.innerText = 'La búsqueda no arrojó ningún resultado';
-
-      divEvent.appendChild(sign);
-
-    } else {
-
-      placeCards(searchedEvent);
-
-    }
+    placeCards(searchedCat(catChecked, searchedValue));
 
   })
 
@@ -378,22 +383,25 @@ const eventDetail = data.events.find(event => event.id.toString() === id)
 
 let detail = document.querySelector('div.detail');
 
-detail.insertAdjacentHTML('beforeend', `<div class="row border border-2 rounded-3 my-4 detail-card">
-<div class="col-lg-8 g-0">
-  <img src="${eventDetail.image}" class="w-100 p-3 object-fit-cover rounded-2" alt="food_fair_picture">
-</div>
-<div class="col-lg-4 p-3 g-0 d-flex flex-column justify-content-end rounded-2">
-  <div class="row m-0 bg-dark text-light">
-    <h2>${eventDetail.name}</h2>
+if(detail) {
+
+  detail.insertAdjacentHTML('beforeend', `<div class="row border border-2 rounded-3 my-4 detail-card">
+  <div class="col-lg-8 g-0">
+    <img src="${eventDetail.image}" class="w-100 p-3 object-fit-cover rounded-2" alt="food_fair_picture">
   </div>
-  <div class="row border border-dark border-opacity-50 mx-0 my-2 rounded-2">
-    <p>${eventDetail.description}</p>
-  </div>
-  <div class="row align-middle m-0">
-    <div class="col bg-info d-flex justify-content-center align-items-center rounded me-2"><p class="m-0">Price: $${eventDetail.price}</p></div>
-    <div class="col g-0">
-      <a href="./index.html" class="btn btn-danger w-100">Back</a>
+  <div class="col-lg-4 p-3 g-0 d-flex flex-column justify-content-end rounded-2">
+    <div class="row m-0 bg-dark text-light">
+      <h2>${eventDetail.name}</h2>
+    </div>
+    <div class="row border border-dark border-opacity-50 mx-0 my-2 rounded-2">
+      <p>${eventDetail.description}</p>
+    </div>
+    <div class="row align-middle m-0">
+      <div class="col bg-info d-flex justify-content-center align-items-center rounded me-2"><p class="m-0">Price: $${eventDetail.price}</p></div>
+      <div class="col g-0">
+        <a href="./index.html" class="btn btn-danger w-100">Back</a>
+      </div>
     </div>
   </div>
-</div>
-</div>`)
+  </div>`)
+}
