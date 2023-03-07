@@ -180,7 +180,7 @@ let searchedCat = (data, searchedValue) => {
 
   data.forEach( event => {
 
-    if(event.name.toLowerCase().includes(searchedValue.toLowerCase())){
+    if(event.name.toLowerCase().includes(searchedValue.toLowerCase()) || event.description.toLowerCase().includes(searchedValue.toLowerCase())) {
   
       searchedCat.push(event);
   
@@ -358,8 +358,6 @@ function searchBar(data) {
   let searchBar = document.querySelector('input.form-control');
 
   searchBar.addEventListener('input',(e) => {
-
-    console.log(e.data)
   
     let searchedValue = document.querySelector('input.form-control').value;
   
