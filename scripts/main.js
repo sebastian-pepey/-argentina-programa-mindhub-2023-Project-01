@@ -19,7 +19,7 @@ let searchedCat = (data, searchedValue) => {
   
   let filteredCat = (data) => {
   
-    let catChecked = document.querySelectorAll('.form-check-input:checked');
+    let catChecked = Array.from(document.querySelectorAll('.form-check-input:checked'));
   
     let searchedValue = document.querySelector('input.form-control').value;
   
@@ -35,7 +35,7 @@ let searchedCat = (data, searchedValue) => {
   
         data.forEach( event => {
   
-          if(event.category === category.id){
+          if(event.category === category.defaultValue){
   
             dataFiltered.push(event)
   
