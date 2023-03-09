@@ -151,6 +151,25 @@ function placeCategories(categoriesArray) {
       <label class="form-check-label" for="${element}">${element}</label>
     </div>`)
   })
+
+  let button = document.createElement('button');
+
+  button.classList.add('btn','btn-success','clearFilters','py-0');
+
+  button.innerText = "Clear Categories"
+
+  button.addEventListener('click',() => {
+
+    let catCheck = document.querySelectorAll('.form-check-input');
+  
+    catCheck.forEach( category => category.checked = false);
+  
+    placeCards(filteredCat(data.events));
+  
+  })
+
+  divCategories.appendChild(button);
+  
 }
 
 // filterCategory
