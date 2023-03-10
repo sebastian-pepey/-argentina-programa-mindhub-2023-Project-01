@@ -1,11 +1,19 @@
-const categories = findCategories(data.events);
+let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
 
-let upcomingEvents = data.events.filter( element => new Date(element.date) > new Date(data.currentDate));
+fetch(urlApi)
+.then( result => result.json())
+.then(data => {
 
-placeCategories(categories);
+    const categories = findCategories(data.events);
 
-placeCards(upcomingEvents);
+    let upcomingEvents = data.events.filter( element => new Date(element.date) > new Date(data.currentDate));
+    
+    placeCategories(categories);
+    
+    placeCards(upcomingEvents);
+    
+    filterCategory(upcomingEvents);
+    
+    searchBar(upcomingEvents);
 
-filterCategory(upcomingEvents);
-
-searchBar(upcomingEvents);
+})

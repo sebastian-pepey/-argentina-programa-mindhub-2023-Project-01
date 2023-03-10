@@ -101,7 +101,7 @@ function placeCards(inputObject) {
             <div class="row">
                 <div class="col"><p>Price: $${element.price}</p></div>
                 <div class="col">
-                  <a href="./details.html?id=${element.id}" class="btn btn-primary">See more...</a>
+                  <a href="./details.html?id=${element._id}" class="btn btn-primary">See more...</a>
                 </div>
             </div>
         </div>`
@@ -163,9 +163,14 @@ function placeCategories(categoriesArray) {
     let catCheck = document.querySelectorAll('.form-check-input');
   
     catCheck.forEach( category => category.checked = false);
-  
-    placeCards(filteredCat(data.events));
-  
+
+    fetch(urlApi)
+    .then( result => result.json())
+    .then(data => {
+
+      placeCards(filteredCat(data.events));
+
+    })  
   })
 
   divCategories.appendChild(button);
@@ -216,36 +221,44 @@ function searchBar(data) {
 
 // Captura de parámetro id de la URL, guardado en variable y renderización por medio de manipulación del DOM.
 
-const queryString = location.search;
-
-const params = new URLSearchParams(queryString);
-
-const id = params.get('id');
-
-const eventDetail = data.events.find(event => event.id.toString() === id)
-
 let detail = document.querySelector('div.detail');
 
 if(detail) {
 
-  detail.insertAdjacentHTML('beforeend', `<div class="row border border-2 rounded-3 my-4 detail-card">
-  <div class="col-lg-8 g-0">
-    <img src="${eventDetail.image}" class="w-100 p-3 object-fit-cover rounded-2" alt="food_fair_picture">
-  </div>
-  <div class="col-lg-4 p-3 g-0 d-flex flex-column justify-content-end rounded-2">
-    <div class="row m-0 bg-dark text-light">
-      <h2>${eventDetail.name}</h2>
+  const queryString = location.search;
+
+  const params = new URLSearchParams(queryString);
+
+  const id = params.get('id');
+
+  let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
+
+  fetch(urlApi)
+  .then( result => result.json())
+  .then(data => {
+
+    const eventDetail = data.events.find(event => event._id.toString() === id)
+
+    detail.insertAdjacentHTML('beforeend', `<div class="row border border-2 rounded-3 my-4 detail-card">
+    <div class="col-lg-8 g-0">
+      <img src="${eventDetail.image}" class="w-100 p-3 object-fit-cover rounded-2" alt="food_fair_picture">
     </div>
-    <div class="row border border-dark border-opacity-50 mx-0 my-2 rounded-2">
-      <p>${eventDetail.description}</p>
-    </div>
-    <div class="row align-middle m-0">
-      <div class="col bg-info d-flex justify-content-center align-items-center rounded me-2"><p class="m-0">Price: $${eventDetail.price}</p></div>
-      <div class="col g-0">
-        <a href="./index.html" class="btn btn-danger w-100">Back</a>
+    <div class="col-lg-4 p-3 g-0 d-flex flex-column justify-content-end rounded-2">
+      <div class="row m-0 bg-dark text-light">
+        <h2>${eventDetail.name}</h2>
+      </div>
+      <div class="row border border-dark border-opacity-50 mx-0 my-2 rounded-2">
+        <p>${eventDetail.description}</p>
+      </div>
+      <div class="row align-middle m-0">
+        <div class="col bg-info d-flex justify-content-center align-items-center rounded me-2"><p class="m-0">Price: $${eventDetail.price}</p></div>
+        <div class="col g-0">
+          <a href="./index.html" class="btn btn-danger w-100">Back</a>
+        </div>
       </div>
     </div>
-  </div>
-  </div>`)
+    </div>`)
+
+  })
 }
   
