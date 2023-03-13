@@ -59,7 +59,7 @@ let filteredCat = (data) => {
   }
 }
   
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 // Funciones Declaradas
 
@@ -261,4 +261,125 @@ if(detail) {
 
   })
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function stats() {
+
+  let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
+
+  fetch(urlApi)
+  .then( result => result.json())
+  .then(data => {
+    let statistics = {
+      capacity:[],
+      assistance:[]
+    }
+
+    let upcomingEvents = [];
+    let pastEvents = [];
+
+    data.events.forEach( element => {
+      if(element.assistance) {
+        statistics.capacity.push([element.name,element.capacity]);
+        statistics.assistance.push([element.name,element.assistance]);
+
+        let index = pastEvents.findIndex(event => event[0] === element.category);
+
+        if (index === -1) {
+          pastEvents.push([element.category, element.price * element.assistance, element.assistance])
+
+        } else {
+          pastEvents[index][1] += element.price * element.assistance;
+          pastEvents[index][2] += element.assistance;
+        }
+
+      } else {
+
+        let index = upcomingEvents.findIndex(event => event[0] === element.category);
+
+        if (index === -1) {
+          upcomingEvents.push([element.category, element.price * element.estimate, element.estimate])
+
+        } else {
+          upcomingEvents[index][1] += element.price * element.estimate;
+          upcomingEvents[index][2] += element.estimate;
+        }
+        
+      }
+    })
+
+    let totalAttUpcoming = upcomingEvents.reduce((accumulator, currentValue) => accumulator + currentValue[2],0);
+    let totalAttPast = pastEvents.reduce((accumulator, currentValue) => accumulator + currentValue[2],0);
+
+    let upcomingTable = document.querySelector('.upcoming-attendance');
+    let pastTable = document.querySelector('.past-attendance');
+
+    orderElements(upcomingEvents, 0, false);
+    orderElements(pastEvents, 0, false);
+    orderElements(statistics.capacity, 1, true);
+    orderElements(statistics.assistance, 1, true);
+
+    placeValues('#highestAttendance',statistics.assistance[statistics.assistance.length-1][0]);
+    placeValues('#lowestAttendance',statistics.assistance[0][0]);
+    placeValues('#largestCapacity',statistics.capacity[statistics.assistance.length-1][0])
+
+    placeRows(upcomingEvents, upcomingTable, totalAttUpcoming);
+
+    placeRows(pastEvents, pastTable, totalAttPast);
+
+    filterCaret('.orderUpcoming', upcomingEvents, upcomingTable, totalAttUpcoming);
+
+    filterCaret('.orderPast', pastEvents, pastTable, totalAttPast);
+
+  })
+
+}
+
+function placeValues(id,value) {
+  let element = document.querySelector(id);
+
+  element.innerText = value;
+}
+
+function placeRows(object, parentElement, total) {
+
+  parentElement.innerHTML = '';
   
+  let fragment = document.createDocumentFragment();
+
+  object.forEach( element => {
+
+    let tr = document.createElement('tr');
+
+    tr.innerHTML = `<td>${element[0]}</td>
+    <td>$${element[1]}</td>
+    <td>${(element[2]/total).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2})}</td>`
+
+    fragment.appendChild(tr);
+  })
+
+  parentElement.appendChild(fragment);
+}
+
+function orderElements(arrayToOrder, index, numeric) {
+  if(numeric){
+    arrayToOrder.sort((a,b)=>b[index]-a[index]);
+  } else {
+    arrayToOrder.sort();
+  }
+}
+
+function filterCaret(itemClass,object, parentElement, total) {
+
+  let iterable = Array.from(document.querySelectorAll(itemClass));
+
+  iterable.forEach( element => {
+    element.addEventListener('click',(e) => {
+      orderElements(object, parseInt(e.target.id), typeof object[0][parseInt(e.target.id)] === 'number');
+      placeRows(object, parentElement, total);
+    })
+  })
+
+}
+
