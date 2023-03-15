@@ -4,8 +4,8 @@ createApp(
   {
     data() {
       return {
-        count: 0,
         events: null,
+        eventsFiltered: null,
         categories: [],
         categoryChecked:[]
       }
@@ -35,18 +35,20 @@ createApp(
 
       applyFilter(){
 
-        this.categoryChecked.forEach( category => {
+        // if()
+
+        // this.categoryChecked.forEach( category => {
           
-          this.events.forEach( event => {
+        //   this.events.forEach( event => {
 
-            if(event.category === category){
+        //     if(event.category === category){
     
-              dataFiltered.push(event)
+        //       this.eventsFiltered.push(event)
     
-            }
-          })
+        //     }
+        //   })
 
-        })
+        // })
       }
     },
   }).mount('#app')
