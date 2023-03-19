@@ -1,23 +1,14 @@
-let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
+// let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
 
-let urlLocal = './scripts/data.json'
+let urlApi = './scripts/data.json';
 
-async function fetchData(url) {
+async function fetchData(url, callback) {
     try {
-
         const response = await fetch(url);
-
-        const parsedResponse = await response.json();
-
-        return parsedResponse.events;
-
+        const data = await response.json();
+        callback(data);
     }
-
     catch {
-        error => console.log(error)
+        error => console.log(error);
     }   
 }
-
-const data = fetchData(urlApi);
-
-console.log(data)

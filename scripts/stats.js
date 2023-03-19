@@ -1,1 +1,1 @@
-stats()
+fetchData(urlApi,stats);
