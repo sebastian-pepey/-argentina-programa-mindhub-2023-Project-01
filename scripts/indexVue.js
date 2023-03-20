@@ -4,10 +4,12 @@ createApp(
   {
     data() {
       return {
+        urlApi: 'https://mindhub-xj03.onrender.com/api/amazing',
         events: null,
-        eventsFiltered: null,
+        eventsBackup: [],
         categories: [],
-        categoryChecked:[]
+        categoryChecked:[],
+        inputValue : '',
       }
     },
     created() {
@@ -17,38 +19,32 @@ createApp(
     },
     methods: {
       fetchAPIEvents() {
-        let urlApi = 'https://mindhub-xj03.onrender.com/api/amazing';
-        fetch(urlApi)
+        fetch(this.urlApi)
         .then( result => result.json())
-        .then(data => {this.events = data.events;
-          this.filterCategory(this.events)
+        .then(data => {
+          this.events = data.events;
+          this.eventsBackup = data.events;
+          this.createFilterCategory(this.events)
         })
       },
 
-      filterCategory(inputObject) {
+      createFilterCategory(inputObject) {
         inputObject.forEach( element => {
           if(!this.categories.includes(element.category)) {
             this.categories.push(element.category);
           }
         })
       },
-
-      applyFilter(){
-
-        // if()
-
-        // this.categoryChecked.forEach( category => {
-          
-        //   this.events.forEach( event => {
-
-        //     if(event.category === category){
-    
-        //       this.eventsFiltered.push(event)
-    
-        //     }
-        //   })
-
-        // })
-      }
     },
+    computed: {
+      filter(){
+        let inputFilter = this.eventsBackup.filter( event => this.categories.includes(event.category))
+        if(categories.length > 0) {
+
+
+        } else {
+          this.events = inputFilter
+        }
+      },
+    }
   }).mount('#app')
