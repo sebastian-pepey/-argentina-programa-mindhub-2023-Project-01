@@ -202,8 +202,8 @@ function stats(data) {
       statistics.pastEvents[element.category].push(
         [
           element.name,
-          element.price * element.assistance,
           element.capacity,
+          element.price * element.assistance,
           element.assistance,
           element.assistance/element.capacity
         ]
@@ -215,8 +215,8 @@ function stats(data) {
       statistics.upcomingEvents[element.category].push(
         [
           element.name,
-          element.price * element.estimate,
           element.capacity,
+          element.price * element.estimate,
           element.estimate,
           element.estimate/element.capacity
         ]
@@ -224,15 +224,26 @@ function stats(data) {
     }
   })
 
+  let initialRegister = 5;
   let arrayStatistics = Object.values(statistics.pastEvents).flat();
+  let lastElementStats = arrayStatistics.length-1;
   orderElements(arrayStatistics, 4, true,-1);
-  let upcomingTable = document.querySelector('.upcoming-attendance');
-  let pastTable = document.querySelector('.past-attendance');
-  placeValues('#highestAttendance', `${arrayStatistics[arrayStatistics.length - 1][0]} (${arrayStatistics[arrayStatistics.length - 1][4].toLocaleString(undefined, {style: 'percent',minimumFractionDigits: 2})})`);
-  placeValues('#lowestAttendance', `${arrayStatistics[0][0]} (${arrayStatistics[0][4].toLocaleString(undefined, {style: 'percent',minimumFractionDigits: 2})})`);
-  orderElements(arrayStatistics, 2, true,-1);
-  placeValues('#largestCapacity', `${arrayStatistics[arrayStatistics.length - 1][0]} (${arrayStatistics[arrayStatistics.length - 1][2]})`);
+  let maxMinTable = document.querySelector('tbody#max-min-values');
+  let upcomingTable = document.querySelector('tbody#upcoming-attendance');
+  let pastTable = document.querySelector('tbody#past-attendance');
+  let select = document.querySelector('select.form-select');
+  arrayStatistics.forEach((element,index)=>{
+    select.innerHTML +=`<option value="${index+1}" ${index === initialRegister-1? " selected":""}>${index+1}</option>`
+  })
+
+  orderElementsByEvent(arrayStatistics, lastElementStats, initialRegister, maxMinTable)
   
+  select.addEventListener('change',(e) => {
+    maxMinTable.innerHTML ='';
+    orderElementsByEvent(arrayStatistics, lastElementStats, parseInt(e.target.value), maxMinTable)
+  });
+  
+
   placeRows(reduceObject(statistics.upcomingEvents), upcomingTable);
   placeRows(reduceObject(statistics.pastEvents), pastTable);
   filterCaret('.orderUpcoming', reduceObject(statistics.upcomingEvents), upcomingTable);
@@ -240,9 +251,23 @@ function stats(data) {
 
 }
 
-function placeValues(id, value) {
-  let element = document.querySelector(id);
-  element.innerText = value;
+function orderElementsByEvent(array, indexMax, lastElement, parentElement) {
+  for(let i = 0; i < lastElement ; i++ ) {
+    parentElement.innerHTML += `<tr>
+      <td> 
+        ${array[indexMax-i][0]} (${array[indexMax-i][4].toLocaleString(undefined, {style: 'percent',minimumFractionDigits: 2})})
+      </td>
+      <td> 
+        ${array[i][0]} (${array[i][4].toLocaleString(undefined, {style: 'percent',minimumFractionDigits: 2})})
+      </td>
+    </tr>`
+  }
+  let capacity = array.map( element => element.slice(0,2));
+  orderElements(capacity, 1, true, 1);
+  let tr = Array.from(parentElement.querySelectorAll('tr'));
+  tr.forEach((element, index) => {
+    element.innerHTML += `<td>${capacity[index][0]} (${capacity[index][1]} places)</td>`
+  })
 }
 
 function placeRows(array, parentElement) {
@@ -269,10 +294,10 @@ function orderElements(arrayToOrder, index, numeric, invert) {
 function filterCaret(itemClass, object, parentElement) {
   let iterable = Array.from(document.querySelectorAll(itemClass));
   iterable.forEach(element => {
-      element.addEventListener('click', (e) => {
-        orderElements(object, parseInt(e.target.id), typeof object[0][parseInt(e.target.id)] === 'number', 1);
-        placeRows(object, parentElement);
-      })
+    element.addEventListener('click', (e) => {
+      orderElements(object, parseInt(e.target.id), typeof object[0][parseInt(e.target.id)] === 'number', 1);
+      placeRows(object, parentElement);
+    })
   })
 }
 
@@ -280,8 +305,8 @@ function reduceObject(object) {
   let result = [];
   for(category in object) {
     result.push([category,
-    object[category].reduce((accumulator,currentValue) => accumulator + currentValue[1],0),
-    object[category].reduce((accumulator,currentValue) => accumulator + currentValue[3],0) / object[category].reduce((accumulator,currentValue) => accumulator + currentValue[2],0)
+    object[category].reduce((accumulator,currentValue) => accumulator + currentValue[2],0),
+    object[category].reduce((accumulator,currentValue) => accumulator + currentValue[3],0) / object[category].reduce((accumulator,currentValue) => accumulator + currentValue[1],0)
     ])
   }
 
